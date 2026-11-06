@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework><IsTestProject>true</IsTestProject><IsPackable>false</IsPackable>
+    <QuantumDesktopRoot>$(MSBuildThisFileDirectory)../../.ci-dependencies/Quantum.Desktop</QuantumDesktopRoot>
+    <QuantumCasRoot>$(MSBuildThisFileDirectory)../../.ci-dependencies/Quantum.Zju.Plugin.Cas</QuantumCasRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(QuantumDesktopRoot)/src/Quantum/Quantum.csproj" />
+    <ProjectReference Include="$(QuantumCasRoot)/src/Quantum.Zju.Plugin.Cas/Quantum.Zju.Plugin.Cas.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../../src/Quantum.ZdbkPlugin/Quantum.ZdbkPlugin.csproj" ReferenceOutputAssembly="false" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" /><PackageReference Include="xunit" /><PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" />
+    <Using Include="Xunit" />
+  </ItemGroup>
+  <Target Name="CopyPluginFixtures" AfterTargets="Build">
+    <ItemGroup>
+      <ZdbkFixture Include="../../src/Quantum.ZdbkPlugin/bin/$(Configuration)/net10.0/Quantum.ZdbkPlugin.dll;../../src/Quantum.ZdbkPlugin/bin/$(Configuration)/net10.0/HtmlAgilityPack.dll;../../src/Quantum.ZdbkPlugin/plugin.json" />
+      <CasFixture Include="$(QuantumCasRoot)/src/Quantum.Zju.Plugin.Cas/bin/$(Configuration)/net10.0/Quantum.Zju.Plugin.Cas.dll;$(QuantumCasRoot)/src/Quantum.Zju.Plugin.Cas/plugin.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ZdbkFixture)" DestinationFolder="$(TargetDir)PluginFixtures/Zdbk" />
+    <Copy SourceFiles="@(CasFixture)" DestinationFolder="$(TargetDir)PluginFixtures/Cas" />
+  </Target>
+</Project>

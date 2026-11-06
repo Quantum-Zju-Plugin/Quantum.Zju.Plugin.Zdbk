@@ -1,0 +1,4 @@
+<Solution>
+  <Folder Name="/src/"><Project Path="src/Quantum.ZdbkPlugin/Quantum.ZdbkPlugin.csproj" /></Folder>
+  <Folder Name="/tests/"><Project Path="tests/Quantum.ZdbkPlugin.Tests/Quantum.ZdbkPlugin.Tests.csproj" /></Folder>
+</Solution>

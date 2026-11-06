@@ -1,0 +1,10 @@
+{
+  "id": "quantum.plugin.zdbk",
+  "version": "0.4.0",
+  "entryAssembly": "Quantum.ZdbkPlugin.dll",
+  "capabilities": {
+    "provides": ["zdbk.list-courses", "zdbk.list-sections", "zdbk.list-selected", "zdbk.list-graduation", "zdbk.get-introduction"],
+    "requires": ["zju.cas.account", "zju.cas.service-ticket"],
+    "integrates": []
+  }
+}
