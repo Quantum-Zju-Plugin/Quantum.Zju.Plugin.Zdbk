@@ -50,6 +50,9 @@ public sealed class AcademicRowsTests
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("de-DE");
             Assert.Equal(3.5m, AcademicRows.Credits("3.5"));
         }
-        finally { CultureInfo.CurrentCulture = original; }
+        finally
+        {
+            CultureInfo.CurrentCulture = original;
+        }
     }
 }
