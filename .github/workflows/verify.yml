@@ -1,0 +1,37 @@
+name: Verify
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build, test and package
+        shell: pwsh
+        run: ./.ci/Build.ps1
+      - name: Verify pinned actual Desktop host
+        shell: pwsh
+        run: ./.ci/Verify-Host.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Quantum.Zju.Plugin.Zdbk-${{ runner.os }}
+          path: artifacts/*.zip
+          if-no-files-found: error
