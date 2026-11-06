@@ -50,14 +50,16 @@ public sealed class AcademicSessionTests
             }
             var discovery = await CallAsync(QuantumCapabilityCatalog.CapabilityName, new { });
             var capabilities = discovery.Value!.Value.GetProperty("capabilities").EnumerateArray().Select(x => x.GetProperty("name").GetString()).ToArray();
-            Assert.Contains("zdbk.list-selected", capabilities); Assert.Contains("zdbk.list-courses", capabilities);
+            Assert.Contains("zdbk.list-selected", capabilities);
+            Assert.Contains("zdbk.list-courses", capabilities);
             Assert.DoesNotContain("zjuam.read-resource", capabilities);
             var anonymous = await CallAsync("zdbk.list-selected", new { });
             Assert.Equal("zdbk_sign_in_required", anonymous.ErrorCode);
             var identity = catalog.FindPlugin("quantum.zju.plugin.cas")!;
             var casType = identity.EntryAssembly!.GetType("Quantum.Zju.Plugin.Cas.ZjuCasSession", true)!;
             var casSession = identity.Services!.GetRequiredService(casType);
-            var client = new HttpClient(new CasEndpoint()); client.DefaultRequestHeaders.UserAgent.ParseAdd("FictionalBrowser/1.0");
+            var client = new HttpClient(new CasEndpoint());
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("FictionalBrowser/1.0");
             casType.GetField("_client", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(casSession, client);
             casType.GetField("_sessionId", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(casSession, "fictional-connection");
             casType.GetField("_userAgent", BindingFlags.Instance | BindingFlags.NonPublic)!.SetValue(casSession, "FictionalBrowser/1.0");
@@ -91,7 +93,8 @@ public sealed class AcademicSessionTests
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            Assert.Equal("https", request.RequestUri!.Scheme); Assert.Equal("zjuam.zju.edu.cn", request.RequestUri.Host);
+            Assert.Equal("https", request.RequestUri!.Scheme);
+            Assert.Equal("zjuam.zju.edu.cn", request.RequestUri.Host);
             var service = Uri.UnescapeDataString(request.RequestUri.Query["?service=".Length..]);
             var reply = new HttpResponseMessage(HttpStatusCode.Found);
             reply.Headers.Location = new Uri(service + "?ticket=ST-fictional");
