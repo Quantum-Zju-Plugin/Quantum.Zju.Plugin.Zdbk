@@ -4,7 +4,7 @@ Push-Location (Split-Path $PSScriptRoot -Parent)
 try {
     foreach ($component in @(
         @{ Name = 'Quantum.Desktop'; Repository = 'io7-cn/Quantum.Desktop'; Pin = 'desktop' },
-        @{ Name = 'Quantum.Zju.Plugin.Cas'; Repository = 'XmmShp/Quantum.Zju.Plugin.Cas'; Pin = 'cas' }
+        @{ Name = 'Quantum.Zju.Plugin.Cas'; Repository = 'Quantum-Zju-Plugin/Quantum.Zju.Plugin.Cas'; Pin = 'cas' }
     )) {
         $revision = (Get-Content ".ci/$($component.Pin)-revision.txt" -Raw).Trim()
         if ($revision -notmatch '^[0-9a-f]{40}$') { throw 'Expected a fixed dependency revision.' }

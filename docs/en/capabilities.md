@@ -2,7 +2,7 @@
 
 [简体中文](../zh-CN/capabilities.md) · [Documentation](README.md)
 
-Zdbk 0.4 consumes `zju.cas.account` and `zju.cas.service-ticket` from the [ZJU CAS account provider](https://github.com/XmmShp/Quantum.Zju.Plugin.Cas). Sign in through the account settings before invoking its business capabilities. The provider supplies [CAS](glossary.md#cas) authentication only; Zdbk owns academic requests, the private [site session](glossary.md#site-session) and response parsing.
+Zdbk 0.4 consumes `zju.cas.account` and `zju.cas.service-ticket` from the [ZJU CAS account provider](https://github.com/Quantum-Zju-Plugin/Quantum.Zju.Plugin.Cas). Sign in through the account settings before invoking its business capabilities. The provider supplies [CAS](glossary.md#cas) authentication only; Zdbk owns academic requests, the private [site session](glossary.md#site-session) and response parsing.
 
 ## Session boundary
 
