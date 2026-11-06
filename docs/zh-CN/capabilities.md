@@ -2,7 +2,7 @@
 
 [English](../en/capabilities.md) · [文档入口](README.md)
 
-Zdbk 0.4 使用[浙大 CAS 账号提供者](https://github.com/XmmShp/Quantum.Zju.Plugin.Cas)的 `zju.cas.account` 与 `zju.cas.service-ticket`。调用业务能力前，先通过账号设置登录。提供者只处理 [CAS](glossary.md#cas) 认证；教务业务请求、私有[站点会话](glossary.md#site-session)和响应解析均由 Zdbk 持有。
+Zdbk 0.4 使用[浙大 CAS 账号提供者](https://github.com/Quantum-Zju-Plugin/Quantum.Zju.Plugin.Cas)的 `zju.cas.account` 与 `zju.cas.service-ticket`。调用业务能力前，先通过账号设置登录。提供者只处理 [CAS](glossary.md#cas) 认证；教务业务请求、私有[站点会话](glossary.md#site-session)和响应解析均由 Zdbk 持有。
 
 ## 会话边界
 
